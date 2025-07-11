@@ -1,0 +1,77 @@
+{
+  "name": "image-descriptor",
+  "displayName": "Image Descriptor",
+  "description": "Generate accessible alternative text for images using AI",
+  "version": "0.0.2",
+  "publisher": "schalkneethling",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schalkneethling/image-descriptor.git"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:html",
+    "onCommand:image-descriptor.suggestAltText"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "image-descriptor.suggestAltText",
+        "title": "Image Descriptor: Suggest alternative text"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "image-descriptor.suggestAltText",
+          "when": "editorLangId == html"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Image Descriptor",
+      "properties": {
+        "imageDescriptor.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key for generating alt text"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "npm run package && vsce publish",
+    "publish:patch": "npm version patch && npm run package && vsce publish",
+    "publish:minor": "npm version minor && npm run package && vsce publish",
+    "publish:major": "npm version major && npm run package && vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6",
+    "@vscode/test-electron": "^2.3.8"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
