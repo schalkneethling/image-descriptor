@@ -2,7 +2,7 @@
   "name": "image-descriptor",
   "displayName": "Image Descriptor",
   "description": "Generate accessible alternative text for images using AI",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "schalkneethling",
   "repository": {
     "type": "git",
