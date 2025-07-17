@@ -28,6 +28,15 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
+        const config = vscode.workspace.getConfiguration("imageDescriptor");
+        const provider = config.get<string>("provider");
+
+        if (!provider) {
+          throw new Error(
+            "Provider not configured. Please choose your preferred provider in the extension settings.",
+          );
+        }
+
         // Extract the src attribute
         const srcAttribute = extractSrcAttribute(imgElement);
         if (!srcAttribute) {
@@ -41,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
         await vscode.window.withProgress(
           {
             location: vscode.ProgressLocation.Notification,
-            title: "Generating alt text...",
+            title: `Generating alt text with ${provider}...`,
             cancellable: false,
           },
           async (progress: vscode.Progress<{ increment: number }>) => {
@@ -55,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
             progress.report({ increment: 50 });
 
             // Generate alt text using AI
-            const altText = await generateAltText(imageData);
+            const altText = await generateAltText(imageData, provider);
             progress.report({ increment: 100 });
 
             // Insert the alt text
@@ -142,10 +151,12 @@ async function prepareImageData(
   return `data:${mimeType};base64,${base64}`;
 }
 
-async function generateAltText(imageData: string): Promise<string> {
+async function generateAltText(
+  imageData: string,
+  provider: string,
+): Promise<string> {
   // Using the user's chosen provider API for image analysis
   const config = vscode.workspace.getConfiguration("imageDescriptor");
-  const provider = config.get<string>("provider");
   const apiKey = config.get<string>("apiKey");
   const baseEndPoints: Record<string, string> = {
     openai: "https://api.openai.com/v1/chat/completions",
@@ -155,12 +166,6 @@ async function generateAltText(imageData: string): Promise<string> {
     openai: "gpt-4o-mini",
     mistral: "mistral-small-latest",
   };
-
-  if (!provider) {
-    throw new Error(
-      "Provider not configured. Please choose your preferred provider in the extension settings.",
-    );
-  }
 
   if (!apiKey) {
     throw new Error(
