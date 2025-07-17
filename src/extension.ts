@@ -146,7 +146,7 @@ async function generateAltText(imageData: string): Promise<string> {
   // Using the user's chosen provider API for image analysis
   const config = vscode.workspace.getConfiguration("imageDescriptor");
   const provider = config.get<string>("provider");
-  const apiKey = config.get<string>("providerApiKey");
+  const apiKey = config.get<string>("apiKey");
   const baseEndPoints: Record<string, string> = {
     openai: "https://api.openai.com/v1/chat/completions",
     mistral: "https://api.mistral.ai/v1/chat/completions",
