@@ -30,13 +30,14 @@ If you want to install from a `.vsix` file:
 
 **Each user must provide their own OpenAI API key.**
 
-1. Get an OpenAI API key from [OpenAI Platform](https://platform.openai.com/)
-2. In VSCode/Cursor, go to Settings (Cmd/Ctrl + ,)
-3. Search for "Image Descriptor"
-4. Enter your OpenAI API key in the `imageDescriptor.openaiApiKey` field
+1. Get an API key from your chosen provider
+2. In VSCode/Cursor, open the extension page
+3. Click on the settings (gear) icon to open the extension settings
+4. Choose your preferred provider from the dropdown
+5. Enter your chosen provider API key in the `imageDescriptor.providerApiKey` field
    - Or add to your `settings.json`:
      ```json
-     "imageDescriptor.openaiApiKey": "your-openai-api-key-here"
+     "imageDescriptor.providerApiKey": "your-api-key-here"
      ```
 
 ## Usage
