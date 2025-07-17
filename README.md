@@ -13,13 +13,16 @@ A VSCode/Cursor extension that generates accessible alternative text for images 
 ## Installation
 
 ### From the VSCode Marketplace
+
 1. Open VSCode or Cursor
 2. Go to the Extensions panel (Cmd/Ctrl + Shift + X)
 3. Search for **Image Descriptor**
 4. Click **Install**
 
 ### Manual Installation (Advanced)
+
 If you want to install from a `.vsix` file:
+
 1. Download the latest `.vsix` file
 2. In VSCode/Cursor, run:
    ```bash
@@ -39,6 +42,8 @@ If you want to install from a `.vsix` file:
      ```json
      "imageDescriptor.providerApiKey": "your-api-key-here"
      ```
+
+> Note: You can also search for `@ext:schalkneethling.image-descriptor` in VSCode's settings
 
 ## Usage
 
@@ -69,7 +74,9 @@ If you want to install from a `.vsix` file:
 5. **Model errors**: Make sure you are using the correct model name (`gpt-4o`) and your API key has access
 
 ### Debug Mode
+
 To enable debug logging:
+
 1. Open Command Palette (Cmd/Ctrl + Shift + P)
 2. Type "Developer: Toggle Developer Tools"
 3. Check the Console tab for detailed logs
@@ -95,4 +102,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this pr
 
 ## License
 
-MIT License 
+MIT License

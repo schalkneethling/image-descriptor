@@ -38,15 +38,10 @@
     "configuration": {
       "title": "Image Descriptor",
       "properties": {
-        "imageDescriptor.apiKey": {
-          "type": "string",
-          "default": "",
-          "description": "Provider API key for generating alt text"
-        },
         "imageDescriptor.provider": {
           "type": "string",
           "default": "openai",
-          "description": "Provider for generating alt text",
+          "description": "Model provider",
           "enum": [
             "openai",
             "mistral"
@@ -55,6 +50,11 @@
             "OpenAI",
             "Mistral"
           ]
+        },
+        "imageDescriptor.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Provider API key"
         }
       }
     }
