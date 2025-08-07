@@ -25,12 +25,20 @@
       {
         "command": "image-descriptor.suggestAltText",
         "title": "Image Descriptor: Suggest alternative text"
+      },
+      {
+        "command": "image-descriptor.translateAltText",
+        "title": "Image Descriptor: Translate to English"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "command": "image-descriptor.suggestAltText",
+          "when": "editorLangId == html"
+        },
+        {
+          "command": "image-descriptor.translateAltText",
           "when": "editorLangId == html"
         }
       ]
