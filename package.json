@@ -75,7 +75,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "package": "vsce package",
-    "publish": "npm run package && vsce publish",
+    "publish": "npm run package && npx vsce publish",
     "publish:patch": "npm version patch && npm run publish",
     "publish:minor": "npm version minor && npm run publish",
     "publish:major": "npm version major && npm run publish",
