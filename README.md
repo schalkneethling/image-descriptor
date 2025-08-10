@@ -1,14 +1,16 @@
 # Image Descriptor
 
-A VSCode/Cursor extension that generates accessible alternative text for images using AI (OpenAI GPT-4o).
+A VSCode and friends extension that suggests accessible alternative text for images using AI or translates existing alt text to English.
 
 ## Features
 
-- Right-click context menu integration for HTML files
-- Supports both absolute URLs and relative file paths
-- Automatically converts local images to base64 for AI processing
-- Uses OpenAI's GPT-4o model for accurate image descriptions
-- Follows web accessibility best practices for alt text generation
+- **AI-Powered Alternative Text Suggestion**: Suggest accessible alternative text for images using AI vision models
+- **Alternative Text Translation**: Write alt text in your native language, then translate it to English without leaving your IDE; preserves cultural context and nuance as much as possible.
+- **Multi-Provider Support**: Choose between OpenAI (GPT-4o-mini) and Mistral AI (mistral-small-latest)
+- **Right-click context menu integration** for HTML files
+- **Supports both absolute URLs and relative file paths**
+- **Automatically converts local images to base64** for AI processing
+- **Follows web accessibility best practices** for alt text suggestion
 
 ## Installation
 
@@ -31,47 +33,71 @@ If you want to install from a `.vsix` file:
 
 ## Configuration
 
-**Each user must provide their own OpenAI API key.**
+**Each user must provide their own API key for their chosen provider.**
 
-1. Get an API key from your chosen provider
+1. Get an API key from your chosen provider (OpenAI or Mistral AI)
 2. In VSCode/Cursor, open the extension page
 3. Click on the settings (gear) icon to open the extension settings
-4. Choose your preferred provider from the dropdown
-5. Enter your chosen provider API key in the `imageDescriptor.providerApiKey` field
+4. Choose your preferred provider from the dropdown:
+   - **OpenAI**: Uses GPT-4o-mini model
+   - **Mistral AI**: Uses mistral-small-latest model
+5. Enter your chosen provider API key in the `imageDescriptor.apiKey` field
    - Or add to your `settings.json`:
      ```json
-     "imageDescriptor.providerApiKey": "your-api-key-here"
+     {
+       "imageDescriptor.provider": "openai",
+       "imageDescriptor.apiKey": "your-api-key-here"
+     }
      ```
 
-> Note: You can also search for `@ext:schalkneethling.image-descriptor` in VSCode's settings
+> Note: You can also search for `@ext:schalkneethling.image-descriptor` in VSCode's settings. Also, PLEASE be very careful not to accidentally leak your API key. Ensure that none of the configuration end up in your `.vscode` setting files as it then may get checked into source control.
 
 ## Usage
 
+### Suggesting Alternative Text
+
 1. Open an HTML file containing an `<img>` element
-2. Place your cursor inside the `alt=""` attribute (or where you want to add it)
+2. Place your cursor inside the `alt=""` attribute
 3. Right-click to open the context menu
 4. Select **Image Descriptor: Suggest alternative text**
 5. The extension will:
    - Extract the image source from the `src` attribute
    - Process the image (URL or local file)
-   - Generate accessible alt text using AI
-   - Insert the generated text into the `alt` attribute
+   - Suggest accessible alternative text using AI
+   - Insert the suggested text into the `alt` attribute
+   - Edit as needed
+
+### Translating Alternative Text to English
+
+This feature is designed for those who would feel more comfortable describing alternative text in their native/first language. If this is you, first write the alt text in your preferred language, then translate it to English.
+
+1. Open an HTML file containing an `<img>` element
+2. Write your alternative text inside the `alt=""` attribute
+3. Right-click to open the context menu
+4. Select **Image Descriptor: Translate to English**
+5. The extension will:
+   - Extract the existing alt text
+   - Translate it to English while preserving cultural context and nuance (as much as possible)
+   - Replace the original alt text with the English translation
 
 ## How it Works
 
 - **Absolute URLs**: Uses the URL directly
 - **Relative paths**: Converts local images to base64 data URLs
 - **File support**: PNG, JPEG, GIF, WebP, SVG
-- **AI Integration**: Uses OpenAI's GPT-4o model (vision + text)
-- **Accessibility**: Follows best practices for concise, descriptive alt text
+- **AI Integration**: Uses vision models for image analysis and language models for translation
+- **Accessibility**: Follows WCAG guidelines for concise, descriptive alternative text
+- **Translation**: Preserves cultural context, idioms, and nuances during translation
 
 ## Troubleshooting
 
 1. **"No img element found"**: Make sure your cursor is inside an `<img>` tag
 2. **"No src attribute found"**: Ensure the image has a `src` attribute
-3. **API key errors**: Verify your OpenAI API key is correctly configured and you have credits
-4. **File not found**: Check that relative paths are correct relative to the HTML file
-5. **Model errors**: Make sure you are using the correct model name (`gpt-4o`) and your API key has access
+3. **"No alt text found"**: Make sure the img element has existing alt text for translation
+4. **API key errors**: Verify your API key is correctly configured and you have credits
+5. **Provider errors**: Ensure you've selected a valid provider in settings
+6. **File not found**: Check that relative paths are correct relative to the HTML file
+7. **Model errors**: Make sure your API key has access to the selected model
 
 ### Debug Mode
 
